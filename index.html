@@ -81,7 +81,7 @@
             <div id="kadoin" onclick="mulai()">
                 <!-- Gift image path -->
                 <img src="Valentine-Surprise.png" alt="Gift" style="width:200px;"/>
-                <p style="font-size:20px; font-weight:bold; color:var(--primary-color);">Ek anokha tohfa aapke liye...</p>
+                <p style="font-size:20px; font-weight:bold; color:var(--primary-color);">Oye! Meri Taraf Se Bas Ek Chhota sa Tohfa....😊</p>
             </div>
             
             <div id="kotakpesan">
@@ -124,14 +124,14 @@
         const kotakpesan = document.getElementById('kotakpesan');
         const thinking = document.getElementById('thinking');
         const mainMusic = document.getElementById('mainMusic');
-        const messages = [ "Aaj ka din bahut khaas hai, pata hai kyun?", "Kyunki aaj aapka janamdin hai! ✨", "Aapki har muskurahat ke saath yeh duniya aur bhi khoobsurat ho jaati hai.", "Dua hai ki aapka aane wala saal khushiyon, pyaar aur kamyabi se bhara ho. ❤️", "Toh chaliye, is jashn ko aur bhi yaadgaar banate hain!", ];
+        const messages = [ "आज का दिन बहुत खास है, पता है क्यों?", "क्योंकि आज तेरा Badde है पागल! ✨", "तू जब खुश होती है, तो मैं भी खुश रहता हूं, तू हंसती है तो मुझे बहुत अच्छा लगता है यही मन करता मैं वो हर चीज कर पाऊं जो तेरी हंसी बरकरार रखे।.", "मैं दुआ करता हु, की आने वाला साल जीवन में खुशियां भर दे, हर सपने पूरे हो... और हां सुन मैं हमेशा तेरे साथ हूं Okk, Ye kabhi mat socha kar ki main pareshan hota, nahi।main kabhi pareshan nahi hota main to tere saath reh chahta teri help karna chahta, main hamesha tere saath hoo Don't Worry Pagal!", ];
         const stickers = ["fotostiker.gif", "fotostiker2.gif", "fotostiker3.gif"];
         let messageIndex = 0;
         let nama = '';
         const bgContainer = document.querySelector('.bg-container');
         const balloonColors = ['#ff6b6b', '#f9c74f', '#90be6d', '#43aa8b', '#577590', '#f94144'];
         for (let i = 0; i < 40; i++) { const el = document.createElement('div'); if (i % 2 === 0) { el.classList.add('balloon'); const randomColor = balloonColors[Math.floor(Math.random() * balloonColors.length)]; el.style.setProperty('--balloon-color', randomColor); } else { el.classList.add('particle'); } el.style.left = `${Math.random() * 100}vw`; el.style.animationDelay = `${Math.random() * 15}s`; bgContainer.appendChild(el); }
-        async function mulai() { const { value: inputNama } = await Swal.fire({ title: "Aapka khoobsurat naam?", input: 'text', confirmButtonText: 'Aage Badhein', allowOutsideClick: false, inputValidator: (value) => !value && 'Kripya apna naam likhein!' }); if (inputNama) { nama = inputNama; mainMusic.play(); kado.style.transition = 'opacity 0.5s, transform 0.5s'; kado.style.opacity = '0'; kado.style.transform = 'scale(0.5)'; setTimeout(() => { kado.style.display = 'none'; showNextMessage(); }, 500); } }
+        async function mulai() { const { value: inputNama } = await Swal.fire({ title: "अपना प्यार सा नाम लिख दो?", input: 'text', confirmButtonText: 'Thoda Sa Aage Badho', allowOutsideClick: false, inputValidator: (value) => !value && 'Apna naam likho!' }); if (inputNama) { nama = inputNama; mainMusic.play(); kado.style.transition = 'opacity 0.5s, transform 0.5s'; kado.style.opacity = '0'; kado.style.transform = 'scale(0.5)'; setTimeout(() => { kado.style.display = 'none'; showNextMessage(); }, 500); } }
         function showNextMessage() { if (messageIndex < messages.length) { kotakpesan.style.display = 'none'; thinking.style.display = 'block'; setTimeout(() => { thinking.style.display = 'none'; kotakpesan.style.display = 'block'; document.getElementById('kalimat').innerHTML = messages[messageIndex].replace('aapka', `<b>${nama}</b> ka`).replace('Aapki', `<b>${nama}</b> ki`); document.getElementById('fotostiker').src = stickers[messageIndex % stickers.length]; messageIndex++; }, 2000); } else { finalSurprise(); } }
         document.getElementById('bq').onclick = showNextMessage;
         async function finalSurprise() { await Swal.fire({ title: `Aakhri Surprise ke liye taiyaar, ${nama}?`, confirmButtonText: 'Haan, bilkul!', allowOutsideClick: false, }).then((result) => { if (result.isConfirmed) { confetti({ particleCount: 200, spread: 180, origin: { y: 0.6 } }); bodylov.style.opacity = '0'; setTimeout(() => { bodylov.style.display = 'none'; tampilkanGaleri(nama); }, 1000); } }); }
